@@ -14,10 +14,10 @@ services:
         build:
             context: docker/apache
             args:
-                - WEB_USER=${WEB_USER}
-                - WEB_GROUP=${WEB_GROUP}
                 - USER_ID=${USER_ID}
                 - GROUP_ID=${GROUP_ID}
+                - WEB_USER=${WEB_USER}
+                - WEB_GROUP=${WEB_GROUP}
                 - APACHE_ROOT_DIR=${APACHE_ROOT_DIR}
         volumes:
             - ./docker/apache/log:${APACHE_ROOT_DIR}/logs
@@ -36,6 +36,8 @@ services:
         build:
             context: docker/php
             args:
+                - USER_ID=${USER_ID}
+                - GROUP_ID=${GROUP_ID}
                 - WEB_USER=${WEB_USER}
                 - WEB_GROUP=${WEB_GROUP}
                 - PHP_ROOT_DIR=${PHP_ROOT_DIR}
@@ -43,21 +45,15 @@ services:
         volumes:
             - .:${PHP_APP_DIR}
             - ./docker/php/log:${PHP_ROOT_DIR}/logs
+            - ./docker/php/conf/www.conf:${PHP_ROOT_DIR}/php-fpm.d/www.conf:ro
         depends_on:
             - apache
             - mysql
         networks:
             public_net:
                 ipv4_address: ${PHP_IP}
-        environment:
-            - PHP_ROOT_DIR=${PHP_ROOT_DIR}
-            - APACHE_IP=${APACHE_IP}
-            - APACHE_EXPOSED_PORT=${APACHE_EXPOSED_PORT}
-            - WEB_USER=${WEB_USER}
-            - WEB_GROUP=${WEB_GROUP}
-            - MYSQL_IP=${MYSQL_IP}
-            - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        env_file:
+            - .env
 
     mysql:
         container_name: ${COMPOSE_PROJECT_NAME}_mysql
