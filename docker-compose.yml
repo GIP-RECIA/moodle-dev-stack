@@ -55,6 +55,36 @@ services:
         env_file:
             - .env
 
+    db:
+        container_name: ${COMPOSE_PROJECT_NAME}_mariadb
+        build:
+            context: docker/mariadb
+            args:
+                - USER_ID=${USER_ID}
+                - GROUP_ID=${GROUP_ID}
+                - MARIADB_CONTAINER_USER=${MARIADB_CONTAINER_USER}
+                - MARIADB_CONTAINER_GROUP=${MARIADB_CONTAINER_GROUP}
+        volumes:
+            - ./docker/mariadb/log:${MARIADB_LOG_DIR}
+            - ./docker/mariadb/data:${MARIADB_DATA_DIR}
+            # Peut être pas indispensable
+            - .docker/mariadb/dump:/docker-entrypoint-initdb.d
+            # La conf a revoir
+            - .docker/mariadb/conf/esco-server.cnf:/etc/mysql/conf.d/custom.cnf:ro
+            - /etc/timezone:/etc/timezone:ro
+        networks:
+            public_net:
+                ipv4_address: ${MARIADB_IP}
+        env_file:
+            - .env
+        command: 'mysqld --innodb-flush-method=fsync'
+        # A voir si utile
+        healthcheck:
+            test: "cat /proc/net/tcp /proc/net/tcp6 | grep ':0CEA'"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
     mysql:
         container_name: ${COMPOSE_PROJECT_NAME}_mysql
         build:

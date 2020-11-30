@@ -2,9 +2,9 @@
  
 echo 'Hello World!'.PHP_EOL;
  
-$servername = getenv('MYSQL_IP');
-$username = getenv('MYSQL_ROOT_USER');
-$password = getenv('MYSQL_ROOT_PASSWORD');
+$servername = getenv('MARIADB_IP');
+$username = getenv('MARIADB_ROOT_USER');
+$password = getenv('MARIADB_ROOT_PASSWORD');
  
 $conn = mysqli_connect($servername, $username, $password);
 if (!$conn) {
