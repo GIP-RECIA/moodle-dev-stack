@@ -145,7 +145,7 @@ services:
             - redis1
         env_file:
             - .env
-    
+
     sentinel3:
         container_name: ${COMPOSE_PROJECT_NAME}_sentinel3
         build:
@@ -160,6 +160,18 @@ services:
         env_file:
             - .env
 
+    haproxy:
+        container_name: ${COMPOSE_PROJECT_NAME}_haproxy
+        image: ${HAPROXY_IMG_VERSION}
+        networks:
+            public_net:
+                ipv4_address: ${HAPROXY_IP}
+        volumes:
+            - ./docker/haproxy/conf/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+        links:
+            - redis1
+            - redis2
+    
     adminer:
         container_name: ${COMPOSE_PROJECT_NAME}_adminer
         image: ${ADMINER_IMG_VERSION}
