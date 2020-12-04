@@ -100,6 +100,8 @@ services:
         command: redis-server /etc/redis/redis.conf
         ports:
             - ${REDIS_EXPOSED_PORT}:6379
+        env_file:
+            - .env
 
     redis2:
         container_name: ${COMPOSE_PROJECT_NAME}_redis2
@@ -113,6 +115,50 @@ services:
         command: redis-server /etc/redis/redis.conf
         links:
             - redis1
+        env_file:
+            - .env
+    
+    sentinel1:
+        container_name: ${COMPOSE_PROJECT_NAME}_sentinel1
+        build:
+            context: docker/redis-sentinel
+            args:
+                - SENTINEL_IMG_VERSION=${SENTINEL_IMG_VERSION}
+        networks:
+            public_net:
+                ipv4_address: ${SENTINEL1_IP}
+        links:
+            - redis1
+        env_file:
+            - .env
+    
+    sentinel2:
+        container_name: ${COMPOSE_PROJECT_NAME}_sentinel2
+        build:
+            context: docker/redis-sentinel
+            args:
+                - SENTINEL_IMG_VERSION=${SENTINEL_IMG_VERSION}
+        networks:
+            public_net:
+                ipv4_address: ${SENTINEL2_IP}
+        links:
+            - redis1
+        env_file:
+            - .env
+    
+    sentinel3:
+        container_name: ${COMPOSE_PROJECT_NAME}_sentinel3
+        build:
+            context: docker/redis-sentinel
+            args:
+                - SENTINEL_IMG_VERSION=${SENTINEL_IMG_VERSION}
+        networks:
+            public_net:
+                ipv4_address: ${SENTINEL3_IP}
+        links:
+            - redis1
+        env_file:
+            - .env
 
     adminer:
         container_name: ${COMPOSE_PROJECT_NAME}_adminer
