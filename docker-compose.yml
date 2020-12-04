@@ -71,9 +71,9 @@ services:
             - ./docker/mariadb/log:${MARIADB_LOG_DIR}
             - ./docker/mariadb/data:${MARIADB_DATA_DIR}
             # Peut être pas indispensable
-            - .docker/mariadb/dump:/docker-entrypoint-initdb.d
+            - ./docker/mariadb/dump:/docker-entrypoint-initdb.d
             # La conf a revoir
-            - .docker/mariadb/conf/esco-server.cnf:/etc/mysql/conf.d/custom.cnf:ro
+            - ./docker/mariadb/conf/esco-server.cnf:/etc/mysql/conf.d/custom.cnf:ro
             - /etc/timezone:/etc/timezone:ro
         networks:
             public_net:
@@ -99,5 +99,3 @@ services:
             - ${ADMINER_EXPOSED_PORT}:8080
         env_file:
             - .env
-        links:
-            - db:${COMPOSE_PROJECT_NAME}_mariadb
