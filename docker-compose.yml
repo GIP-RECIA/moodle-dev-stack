@@ -88,9 +88,33 @@ services:
             timeout: 5s
             retries: 5
 
+    redis1:
+        container_name: ${COMPOSE_PROJECT_NAME}_redis1
+        image: ${REDIS_IMG_VERSION}
+        networks:
+            public_net:
+                ipv4_address: ${REDIS1_IP}
+        volumes:
+            - ./docker/redis/conf/redis-master.conf:/etc/redis/redis.conf
+        command: redis-server /etc/redis/redis.conf
+        ports:
+            - ${REDIS_EXPOSED_PORT}:6379
+
+    redis2:
+        container_name: ${COMPOSE_PROJECT_NAME}_redis2
+        image: ${REDIS_IMG_VERSION}
+        networks:
+            public_net:
+                ipv4_address: ${REDIS2_IP}
+        volumes:
+            - ./docker/redis/conf/redis-slave.conf:/etc/redis/redis.conf
+        command: redis-server /etc/redis/redis.conf
+        links:
+            - redis1
+
     adminer:
         container_name: ${COMPOSE_PROJECT_NAME}_adminer
-        image: adminer
+        image: ${ADMINER_IMG_VERSION}
         networks:
             public_net:
                 ipv4_address: ${ADMINER_IP}
