@@ -126,6 +126,9 @@ innodb_log_file_size=256M
 innodb_log_buffer_size=64M
 # JG - fin
 
+# Ajout du 07/12/2020 pour l'install de moodle
+innodb_large_prefix=ON
+
 #
 # * Security Features
 #

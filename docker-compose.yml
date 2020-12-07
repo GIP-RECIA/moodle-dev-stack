@@ -42,10 +42,12 @@ services:
                 - GROUP_ID=${GROUP_ID}
                 - WEB_USER=${WEB_USER}
                 - WEB_GROUP=${WEB_GROUP}
+                - PHP_DATA_DIR=${PHP_DATA_DIR}
                 - PHP_ROOT_DIR=${PHP_ROOT_DIR}
         working_dir: ${PHP_APP_DIR}
         volumes:
             - ./public:${PHP_APP_DIR}
+            - ./docker/php/data:${PHP_DATA_DIR}
             - ./docker/php/log:${PHP_ROOT_DIR}/logs
             - ./docker/php/conf/www.conf:${PHP_ROOT_DIR}/php-fpm.d/www.conf:ro
         depends_on:
@@ -70,10 +72,8 @@ services:
         volumes:
             - ./docker/mariadb/log:${MARIADB_LOG_DIR}
             - ./docker/mariadb/data:${MARIADB_DATA_DIR}
-            # Peut être pas indispensable
-            - ./docker/mariadb/dump:/docker-entrypoint-initdb.d
             # La conf a revoir
-            - ./docker/mariadb/conf/esco-server.cnf:/etc/mysql/conf.d/custom.cnf:ro
+            - ./docker/mariadb/conf/esco-strict-server.cnf:/etc/mysql/conf.d/custom.cnf:ro
             - /etc/timezone:/etc/timezone:ro
         networks:
             public_net:
