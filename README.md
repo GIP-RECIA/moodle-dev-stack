@@ -4,30 +4,14 @@ Projet ayant pour but de reconstituer un environnement de développement pour Mo
 
 Une fois démarré, Moodle est disponible à l'adresse suivante : http://localhost:8080
 
-## Composition
-
-* apache : Le frontal.
-* php : Pour executer Moodle.
-* mariadb : La BDD.
-* redis1 : Le serveur 1/2 du cluster Redis.
-* redis2 : Le serveur 2/2 du cluster Redis.
-* sentinel1 : Le serveur 1/3 de Sentinel, pour gérer quel est le redis maître.
-* sentinel2 : Le serveur 2/3 de Sentinel.
-* sentinel3 : Le serveur 3/3 de Sentinel.
-* haproxy : Gére la séparation sur deux ports des requêtes de lecture/écriture vers Redis.
-* adminer : Consultation de la bdd.
-* phpredisadmin : Permet de consulter redis a travers une interface web.
-
-## Ports linké sur localhost
-
-* 8080 : http moodle
-* 8081 : http adminer
-* 8082 : http phpredisadmin
-* 33306 : mariadb
-* 56379 : haproxy redis read
-* 56380 : haproxy redis write
-
 ## Fonctionnement
+
+**IMPORTANT** : Avant toute chose, il faut initialiser le projet avec la commande suivante :
+```bash
+bash ./bin/init.sh
+```
+
+Ensuite il faut charger le code de moodle dans le dossier public.
 
 Construire la stack de dev :
 ```bash
@@ -53,6 +37,29 @@ docker-compose down
 
 Le code de Moodle est à déployer dans le dossier public.  
 Le dossier public est dans le .gitignore pour ne pas être enregistré dans ce dépôt.
+
+## Composition
+
+* apache : Le frontal.
+* php : Pour executer Moodle.
+* mariadb : La BDD.
+* redis1 : Le serveur 1/2 du cluster Redis.
+* redis2 : Le serveur 2/2 du cluster Redis.
+* sentinel1 : Le serveur 1/3 de Sentinel, pour gérer quel est le redis maître.
+* sentinel2 : Le serveur 2/3 de Sentinel.
+* sentinel3 : Le serveur 3/3 de Sentinel.
+* haproxy : Gére la séparation sur deux ports des requêtes de lecture/écriture vers Redis.
+* adminer : Consultation de la bdd.
+* phpredisadmin : Permet de consulter redis a travers une interface web.
+
+## Ports linké sur localhost
+
+* [8080](http://localhost:8080) : http moodle
+* [8081](http://localhost:8081) : http adminer
+* [8082](http://localhost:8082) : http phpredisadmin
+* 33306 : mariadb
+* 56379 : haproxy redis read
+* 56380 : haproxy redis write
 
 ## Quelques commandes à connaître
 
