@@ -24,6 +24,7 @@ services:
             - ./docker/apache/log:${APACHE_ROOT_DIR}/logs
             - ./docker/apache/conf/httpd.conf:${APACHE_ROOT_DIR}/conf/httpd.conf:ro
             - ./docker/apache/conf/httpd-vhosts.conf:${APACHE_ROOT_DIR}/conf/extra/httpd-vhosts.conf:ro
+            - ./public:${APACHE_ROOT_DIR}/htdocs
         ports:
             - ${APACHE_EXPOSED_PORT}:80
         networks:
