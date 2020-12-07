@@ -57,6 +57,7 @@ Le dossier public est dans le .gitignore pour ne pas être enregistré dans ce d
 * [8080](http://localhost:8080) : http moodle
 * [8081](http://localhost:8081) : http adminer
 * [8082](http://localhost:8082) : http phpredisadmin
+* [8083](http://localhost:8083) : http stats haproxy
 * 33306 : mariadb
 * 56379 : haproxy redis read
 * 56380 : haproxy redis write

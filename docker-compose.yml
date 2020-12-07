@@ -171,6 +171,7 @@ services:
             public_net:
                 ipv4_address: ${HAPROXY_IP}
         ports:
+            - ${HAPROXY_EXPOSED_PORT}:8080
             - ${HAPROXY_REDIS_READ_EXPOSED_PORT}:6379
             - ${HAPROXY_REDIS_WRITE_EXPOSED_PORT}:6380
         volumes:
