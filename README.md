@@ -2,6 +2,20 @@
 
 Projet ayant pour but de reconstituer un environnement de développement pour Moodle, qui soit aussi proche de la prod que possible.
 
+## Composition
+
+* apache : Le frontal.
+* php : Pour executer Moodle.
+* mariadb : La BDD.
+* redis1 : Le serveur 1/2 du cluster Redis.
+* redis2 : Le serveur 2/2 du cluster Redis.
+* sentinel1 : Le serveur 1/3 de Sentinel, pour gérer quel est le redis maître.
+* sentinel2 : Le serveur 2/3 de Sentinel.
+* sentinel3 : Le serveur 3/3 de Sentinel.
+* haproxy : Gére la séparation sur deux ports des requêtes de lecture/écriture vers Redis.
+* adminer : Consultation de la bdd.
+* phpredisadmin : Permet de consulter redis a travers une interface web.
+
 ## Fonctionnement
 
 Construire la stack de dev :
