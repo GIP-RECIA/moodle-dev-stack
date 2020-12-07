@@ -1,3 +1,6 @@
+# Conf vscode
+/.vscode
+
 # Répertoire contenant les sources de moodle
 /public
 

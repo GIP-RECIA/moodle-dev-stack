@@ -96,7 +96,7 @@ services:
                 ipv4_address: ${REDIS1_IP}
         volumes:
             - ./docker/redis/conf/redis-master.conf:/etc/redis/redis.conf
-            - ./docker/redis/data:/data
+            - ./docker/redis/data1:/data
         command: redis-server /etc/redis/redis.conf
         ports:
             - ${REDIS_EXPOSED_PORT}:6379
@@ -111,7 +111,7 @@ services:
                 ipv4_address: ${REDIS2_IP}
         volumes:
             - ./docker/redis/conf/redis-slave.conf:/etc/redis/redis.conf
-            - ./docker/redis/data:/data
+            - ./docker/redis/data2:/data
         command: redis-server /etc/redis/redis.conf
         links:
             - redis1
