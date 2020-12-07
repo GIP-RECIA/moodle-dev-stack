@@ -2,6 +2,8 @@
 
 Projet ayant pour but de reconstituer un environnement de développement pour Moodle, qui soit aussi proche de la prod que possible.
 
+Une fois démarré, Moodle est disponible à l'adresse suivante : http://localhost:8080
+
 ## Composition
 
 * apache : Le frontal.
@@ -15,6 +17,15 @@ Projet ayant pour but de reconstituer un environnement de développement pour Mo
 * haproxy : Gére la séparation sur deux ports des requêtes de lecture/écriture vers Redis.
 * adminer : Consultation de la bdd.
 * phpredisadmin : Permet de consulter redis a travers une interface web.
+
+## Ports linké sur localhost
+
+* 8080 : http moodle
+* 8081 : http adminer
+* 8082 : http phpredisadmin
+* 33306 : mariadb
+* 56379 : haproxy redis read
+* 56380 : haproxy redis write
 
 ## Fonctionnement
 
