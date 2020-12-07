@@ -124,3 +124,19 @@ Faire un get sur haproxy :
 ```bash
 docker exec mde_redis1 redis-cli -h haproxy GET hello
 ```
+
+## Procédure d'installation de moodle
+
+* Choisissez votre langue : Français (fr)
+* Confirmer les chemins d'accès :
+  * Adresse web : http://localhost:8080
+  * Dossier Moodle : /srv/app
+  * Dossier de données : /srv/moodledata
+* Sélectionner un pilote de base de données : MariaDB (native/mariadb)
+* Réglages de la base de données
+  * Serveur de base de données : db
+  * Nom de la base de données : moodle
+  * Utilisateur de la base de données : moodle
+  * Mot de passe de la base de données : moodle
+  * Préfixe des tables : mdl_
+  
