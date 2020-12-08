@@ -186,7 +186,6 @@ services:
         networks:
             public_net:
                 ipv4_address: ${ADMINER_IP}
-        restart: always
         ports:
             - ${ADMINER_EXPOSED_PORT}:8080
         env_file:
