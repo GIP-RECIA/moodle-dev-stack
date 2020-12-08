@@ -14,5 +14,7 @@ RUN apk update && apk upgrade \
     && usermod -u ${USER_ID} ${WEB_USER} && groupmod -g ${GROUP_ID} ${WEB_GROUP} \
     && chown -R ${WEB_USER}:${WEB_GROUP} ${PHP_ROOT_DIR}/php-fpm.d/www.conf \
     && apk del .userAndGroupUpdate ${DEL_PKGS} \
-    && apk add --no-cache icu-dev libpng-dev libxml2-dev libzip-dev \
-    && docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip
+    && apk add --no-cache $PHPIZE_DEPS icu-dev libpng-dev libxml2-dev libzip-dev \
+    && pecl install xdebug \
+    && docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip \
+    && docker-php-ext-enable xdebug

@@ -17,6 +17,7 @@ source "${FUNCTIONS_FILE}"
 main() {
   delete_directory_content_and_add_gitignore "./docker/redis/data1"
   delete_directory_content_and_add_gitignore "./docker/redis/data2"
+  echo "Del redis data : ${GREEN}Ok${RESET}"
 }
 
 main "$@"
