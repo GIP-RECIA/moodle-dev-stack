@@ -8,7 +8,7 @@ Une fois démarré, Moodle est disponible à l'adresse suivante : http://localho
 
 **IMPORTANT** : Avant toute chose, il faut initialiser le projet avec la commande suivante :
 ```bash
-bash ./bin/init.sh
+bash ./bin/init
 ```
 
 Ensuite il faut charger le code de moodle dans le dossier public.
