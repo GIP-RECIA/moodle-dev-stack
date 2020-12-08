@@ -15,6 +15,6 @@ RUN apk update && apk upgrade \
     && chown -R ${WEB_USER}:${WEB_GROUP} ${PHP_ROOT_DIR}/php-fpm.d/www.conf \
     && apk del .userAndGroupUpdate ${DEL_PKGS} \
     && apk add --no-cache $PHPIZE_DEPS icu-dev libpng-dev libxml2-dev libzip-dev \
-    && pecl install xdebug \
+    && pecl install redis xdebug \
     && docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-enable redis xdebug
