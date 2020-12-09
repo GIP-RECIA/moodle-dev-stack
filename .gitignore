@@ -1,9 +1,9 @@
 # Conf vscode
 /.vscode
 
-# Répertoire contenant les sources de moodle
+# Répertoires contenant les sources de moodle
 /moodle
-/moodle-official
+/moodle-*
 
 # Liste de ce qu'il me reste a faire
 /TODO.md
