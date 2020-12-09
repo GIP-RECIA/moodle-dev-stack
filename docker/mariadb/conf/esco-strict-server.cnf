@@ -11,6 +11,13 @@
 # this is only for the mysqld standalone daemon
 [mysqld]
 
+###############################################################################
+# section a activer pour avoir les logs dans le dossier des logs              #
+###############################################################################
+#general_log=1
+#general_log_file = /var/log/mysql/mysql.log
+#log_error = /var/log/mysql/error.log
+
 #
 # * Basic Settings
 #
