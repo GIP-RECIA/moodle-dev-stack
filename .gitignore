@@ -2,7 +2,8 @@
 /.vscode
 
 # Répertoire contenant les sources de moodle
-/public
+/moodle
+/moodle-official
 
 # Liste de ce qu'il me reste a faire
 /TODO.md
