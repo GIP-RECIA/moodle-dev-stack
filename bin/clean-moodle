@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# A lancer de la racine du projet.
+# Petit script ayant pour but de nettoyer moodle pour le remettre à zero
+#
+
+readonly FUNCTIONS_FILE="./bin/functions.inc.sh"
+
+if [[ ! -f "${FUNCTIONS_FILE}" ]] ; then
+    echo "Le fichier ${FUNCTIONS_FILE} n'existe pas." >&2
+    exit 1
+fi
+
+# shellcheck source=./bin/functions.inc.sh
+source "${FUNCTIONS_FILE}"
+source ".env"
+
+main() {
+  echo "${YELLOW}== Suppression du config.php ==${RESET}"
+  rm -Rf "${MOODLE_DIRECTORY}/config.php"
+}
+
+main "$@"
