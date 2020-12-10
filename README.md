@@ -127,6 +127,20 @@ docker exec mde_redis1 redis-cli -h haproxy GET hello
 
 ## Procédure d'installation de moodle
 
+### Récupération des sources
+
+Le moodle recia :
+```bash
+git clone https://github.com/GIP-RECIA/moodle.git moodle-recia
+```
+
+Le moodle original :
+```bash
+git clone https://github.com/moodle/moodle.git moodle-official
+```
+
+### Informations à saisir
+
 * Choisissez votre langue : Français (fr)
 * Confirmer les chemins d'accès :
   * Adresse web : http://localhost:8080
