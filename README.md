@@ -11,7 +11,8 @@ Une fois démarré, Moodle est disponible à l'adresse suivante : http://localho
 bash ./bin/init
 ```
 
-Ensuite il faut charger le code de moodle dans le dossier public.
+Ensuite il faut charger le code de moodle dans le dossier spécifique à moodle spécifié par la variable d'env `MOODLE_DIRECTORY` du fichier .env.  
+Par défaut ce dossier est `/moodle`.
 
 Construire la stack de dev :
 ```bash
@@ -35,8 +36,7 @@ Stopper la stack de dev en background :
 docker-compose down
 ```
 
-Le code de Moodle est à déployer dans le dossier public.  
-Le dossier public est dans le .gitignore pour ne pas être enregistré dans ce dépôt.
+Le dossier `moodle` est dans le .gitignore pour ne pas être enregistré dans ce dépôt.
 
 ## Composition
 
