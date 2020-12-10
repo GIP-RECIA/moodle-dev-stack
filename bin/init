@@ -19,8 +19,8 @@ main() {
   chmod +x bin/*
   echo "${LT_BLUE}chmod +x bin/functions.inc.sh${RESET}"
   chmod -x bin/functions.inc.sh
-  echo "${LT_BLUE}mkdir -p public${RESET}"
-  mkdir -p public
+  echo "${LT_BLUE}mkdir -p ./${MOODLE_DIRECTORY}${RESET}"
+  mkdir -p ./${MOODLE_DIRECTORY}
   echo "${YELLOW}== Installation du debug dans vscode ==${RESET}"
   read -r -p "${YELLOW}Voulez-vous installer le debug dans vscode ? [y/N] ${RESET}" response
   case $response in
