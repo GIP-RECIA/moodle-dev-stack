@@ -3,19 +3,21 @@
 # Ensemble de fonction nécessaires aux autres scripts
 
 # COLORS
-export BLACK=$(tput -Txterm setaf 0)
-export RED=$(tput -Txterm setaf 1)
-export GREEN=$(tput -Txterm setaf 2)
-export YELLOW=$(tput -Txterm setaf 3)
-export DK_BLUE=$(tput -Txterm setaf 4)
-export PINK=$(tput -Txterm setaf 5)
-export LT_BLUE=$(tput -Txterm setaf 6)
+BLACK=$(tput -Txterm setaf 0)
+RED=$(tput -Txterm setaf 1)
+GREEN=$(tput -Txterm setaf 2)
+YELLOW=$(tput -Txterm setaf 3)
+DK_BLUE=$(tput -Txterm setaf 4)
+PINK=$(tput -Txterm setaf 5)
+LT_BLUE=$(tput -Txterm setaf 6)
 
-export BOLD=$(tput -Txterm bold)
-export RESET=$(tput -Txterm sgr0)
+BOLD=$(tput -Txterm bold)
+RESET=$(tput -Txterm sgr0)
 
 # Global
-export TERM=xterm-color
+TERM=xterm-color
+
+export BLACK, RED, GREEN, YELLOW, DK_BLUE, PINK, LT_BLUE, BOLD, RESET, TERM
 
 
 #######################################
