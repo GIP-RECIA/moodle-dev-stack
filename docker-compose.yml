@@ -52,6 +52,7 @@ services:
             - ./docker/php/data:${PHP_DATA_DIR}
             - ./docker/php/log:${PHP_ROOT_DIR}/logs
             - ./docker/php/conf/www.conf:${PHP_ROOT_DIR}/php-fpm.d/www.conf:ro
+            - ./docker/php/conf/docker-php.ini:/usr/local/etc/php/conf.d/docker-php.ini:ro
             - ./docker/php/conf/docker-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         depends_on:
             - apache
