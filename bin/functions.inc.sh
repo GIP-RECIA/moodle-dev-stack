@@ -17,7 +17,7 @@ RESET=$(tput -Txterm sgr0)
 # Global
 TERM=xterm-color
 
-export BLACK, RED, GREEN, YELLOW, DK_BLUE, PINK, LT_BLUE, BOLD, RESET, TERM
+export BLACK RED GREEN YELLOW DK_BLUE PINK LT_BLUE BOLD RESET TERM
 
 
 #######################################
