@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# A lancer de la racine du projet.
+# Petit script ayant pour but de créer la config moodle.
+#
+
+readonly FUNCTIONS_FILE="./bin/functions.inc.sh"
+
+if [[ ! -f "${FUNCTIONS_FILE}" ]] ; then
+    echo "Le fichier ${FUNCTIONS_FILE} n'existe pas." >&2
+    exit 1
+fi
+
+# shellcheck source=./bin/functions.inc.sh
+source "${FUNCTIONS_FILE}"
+source ".env"
+
+main() {
+  rm -f "./${MOODLE_DIRECTORY}/config.php"
+  cat > "./${MOODLE_DIRECTORY}/config.php" << EOF
+<?php  // Moodle configuration file
+
+unset(\$CFG);
+global \$CFG;
+\$CFG = new stdClass();
+
+\$CFG->dbtype    = 'mariadb';
+\$CFG->dblibrary = 'native';
+\$CFG->dbhost    = 'db';
+\$CFG->dbname    = 'moodle';
+\$CFG->dbuser    = 'moodle';
+\$CFG->dbpass    = 'moodle';
+\$CFG->prefix    = 'mdl_';
+\$CFG->dboptions = array (
+  'dbpersist' => 0,
+  'dbport' => '',
+  'dbsocket' => '',
+  'dbcollation' => 'utf8mb4_unicode_520_ci',
+);
+
+\$CFG->wwwroot   = 'http://${1:-localhost}:8080';
+\$CFG->dataroot  = '/srv/moodledata';
+\$CFG->admin     = 'admin';
+
+\$CFG->directorypermissions = 0777;
+
+require_once(__DIR__ . '/lib/setup.php');
+
+// There is no php closing tag in this file,
+// it is intentional because it prevents trailing whitespace problems!
+
+EOF
+  echo "Create moodle config : ${GREEN}Ok${RESET}"
+}
+
+main "$@"

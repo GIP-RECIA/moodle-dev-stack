@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# A lancer de la racine du projet.
+# Petit script ayant pour but d'effacer la config moodle.
+#
+
+readonly FUNCTIONS_FILE="./bin/functions.inc.sh"
+
+if [[ ! -f "${FUNCTIONS_FILE}" ]] ; then
+    echo "Le fichier ${FUNCTIONS_FILE} n'existe pas." >&2
+    exit 1
+fi
+
+# shellcheck source=./bin/functions.inc.sh
+source "${FUNCTIONS_FILE}"
+source ".env"
+
+main() {
+  rm -f "./${MOODLE_DIRECTORY}/config.php"
+  echo "Del moodle config : ${GREEN}Ok${RESET}"
+}
+
+main "$@"
