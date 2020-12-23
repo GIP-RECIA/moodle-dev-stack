@@ -51,6 +51,7 @@ Le dossier `moodle` est dans le .gitignore pour ne pas être enregistré dans ce
 * haproxy : Gére la séparation sur deux ports des requêtes de lecture/écriture vers Redis.
 * adminer : Consultation de la bdd.
 * phpredisadmin : Permet de consulter redis a travers une interface web.
+* mailcatcher : Permet de lire les mails envoyé sur ce faux smtp.
 
 ## Ports linké sur localhost
 
@@ -58,6 +59,7 @@ Le dossier `moodle` est dans le .gitignore pour ne pas être enregistré dans ce
 * [8081](http://localhost:8081) : http adminer
 * [8082](http://localhost:8082) : http phpredisadmin
 * [8083](http://localhost:8083) : http stats haproxy
+* [8084](http://localhost:8084) : http mailcatcher
 * 33306 : mariadb
 * 56379 : haproxy redis read
 * 56380 : haproxy redis write
@@ -153,4 +155,17 @@ git clone https://github.com/moodle/moodle.git moodle-official
   * Utilisateur de la base de données : moodle
   * Mot de passe de la base de données : moodle
   * Préfixe des tables : mdl_
-  
+
+### Configuration du smtp
+
+#### Configuration
+
+Dans Moodle, sélectionner **Administration du site**/**Serveur**/**Courriel**/**Configuration du courriel sortant**.
+
+Dans **Hôtes SMTP** saisir **mailcatcher** puis enregistrer les modifications.
+#### Test
+
+Installer le plugin [Moodle eMail Test](https://moodle.org/plugins/local_mailtest).
+
+Aller dans **Administration du site**/**Serveur**/**Courriel**/**Test du système de courriel** puis utiliser le formulaire pour tester l'envoie d'un mail.  
+Vous devriez alors retrouver votre mails dans l'interface de [mailcatcher](http://localhost:8084).
