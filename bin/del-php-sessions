@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# A lancer de la racine du projet.
+# Petit script ayant pour but d'effacer les sessions php
+#
+
+readonly FUNCTIONS_FILE="./bin/functions.inc.sh"
+readonly SESSION_DIR="/srv/moodledata/sessions"
+
+if [[ ! -f "${FUNCTIONS_FILE}" ]] ; then
+    echo "Le fichier ${FUNCTIONS_FILE} n'existe pas." >&2
+    exit 1
+fi
+
+# shellcheck source=./bin/functions.inc.sh
+source "${FUNCTIONS_FILE}"
+
+main() {
+  echo "${YELLOW}Liste des sessions avant effacement : ${RESET}"
+  docker exec mde_php ls -la "${SESSION_DIR}"
+  docker exec mde_php rm -Rf "${SESSION_DIR}"
+  docker exec mde_php mkdir "${SESSION_DIR}"
+  docker exec mde_php chown www-data:www-data "${SESSION_DIR}"
+  echo "${YELLOW}Les sessions php ont été supprimées${RESET}"
+}
+
+main "$@"
