@@ -41,8 +41,27 @@ global \$CFG;
 \$CFG->wwwroot   = 'http://${1:-localhost}:8080';
 \$CFG->dataroot  = '/srv/moodledata';
 \$CFG->admin     = 'admin';
+\$CFG->webpath   = '';
+
+\$CFG->lstwwwroot = [
+  'http://localhost:8080',
+  'http://ormes:8080',
+  'http://ormes2:8080',
+  'https://lycees.netocentre.fr/moodle',
+  \$CFG->webpath,
+];
 
 \$CFG->directorypermissions = 0777;
+
+\$CFG->session_handler_class = '\core\session\redis';
+\$CFG->session_redis_host = 'haproxy';
+\$CFG->session_redis_port = 6380;  // Optional.
+\$CFG->session_redis_database = 0;  // Optional, default is db 0.
+\$CFG->session_redis_auth = ''; // Optional, default is don't set one.
+\$CFG->session_redis_prefix = ''; // Optional, default is don't set one.
+\$CFG->session_redis_acquire_lock_timeout = 120;
+\$CFG->session_redis_lock_expire = 7200;
+\$CFG->session_redis_serializer_use_igbinary = true;/**/
 
 require_once(__DIR__ . '/lib/setup.php');
 

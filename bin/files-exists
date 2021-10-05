@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for line in $(cat ./listFiles.txt); do
+  FILEDIR="./docker/php/data/filedir/${line:0:2}/${line:2:2}/$line"
+
+  if [ -e $FILEDIR ]; then
+    echo $line "O"
+  else
+    echo $line "X"
+  fi
+done 

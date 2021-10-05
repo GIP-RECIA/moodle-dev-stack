@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# On efface l'ancien H5P et on créé le nouveau dossier
+rm -Rf ./moodle-official/mod/hvp
+mkdir ./moodle-official/mod/hvp
+#mv ./moodle-official/mod/hvp ./hvp-tmp
+
+#cp -r ../prjs-mods/prjs-H5P/moodle-mod_hvp-fork-lvillanne-recia ./moodle-official/mod/hvp
+#rsync -av --progress ../prjs-mods/prjs-H5P/moodle-mod_hvp-fork-lvillanne-recia/* ./moodle-official/mod/hvp --exclude .git
+#mv ./moodle-official/mod/moodle-mod_hvp-fork-lvillanne-recia ./moodle-official/mod/hvp
+
+# On copie le projet que j'ai forké
+rsync -a ../prjs-mods/prjs-H5P/moodle-mod_hvp-fork-lvillanne-recia/* ./moodle-official/mod/hvp
+# Puis on copie ses dépendances en prenant la dépendance des librairies forkés avec la modif
+rsync -a ../prjs-mods/prjs-H5P/h5p-editor-php-library-official/* ./moodle-official/mod/hvp/editor
+rsync -a ../prjs-mods/prjs-H5P/h5p-php-library-fork-otacke/* ./moodle-official/mod/hvp/library
+rsync -a ../prjs-mods/prjs-H5P/h5p-php-report-official/* ./moodle-official/mod/hvp/reporting
+
+echo "Copie des dépôts de H5P terminé"
