@@ -141,7 +141,17 @@ Le moodle original :
 git clone https://github.com/moodle/moodle.git moodle-official
 ```
 
-### Informations à saisir
+### Installation rapide
+
+Si problème voir pour ne pas faire la seconde commande.
+```
+./bin/del-all 
+./bin/create-config
+```
+
+http://localhost:8080/install.php?lang=fr
+
+Informations à saisir :
 
 * Choisissez votre langue : Français (fr)
 * Confirmer les chemins d'accès :

@@ -21,4 +21,5 @@ RUN apk update && apk upgrade \
     && apk add --no-cache $PHPIZE_DEPS icu-dev libpng-dev libxml2-dev libzip-dev \
     && pecl install igbinary redis xdebug \
     && docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip \
-    && docker-php-ext-enable igbinary redis xdebug
+    && docker-php-ext-enable igbinary redis xdebug \
+    && apk add --no-cache ghostscript
