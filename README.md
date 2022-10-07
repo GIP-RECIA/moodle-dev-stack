@@ -24,6 +24,11 @@ Démarrer la stack de dev :
 docker-compose up
 ```
 
+Démarrer la stack de dev avec un fichier .env perso :
+```BASH
+docker-compose --env-file ./.local.env uP
+```
+
 Stopper la stack de dev : `ctrl + c`
 
 Démarrer la stack de dev en background :
