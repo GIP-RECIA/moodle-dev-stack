@@ -33,6 +33,7 @@ services:
                 ipv4_address: ${APACHE_IP}
         env_file:
             - .env
+            - .local.env
 
     php:
         container_name: ${COMPOSE_PROJECT_NAME}_php
@@ -45,11 +46,13 @@ services:
                 - WEB_USER=${WEB_USER}
                 - WEB_GROUP=${WEB_GROUP}
                 - PHP_DATA_DIR=${PHP_DATA_DIR}
+                - PHP_PHPU_DATA_DIR=${PHP_PHPU_DATA_DIR}
                 - PHP_ROOT_DIR=${PHP_ROOT_DIR}
         working_dir: ${PHP_APP_DIR}
         volumes:
             - ./${MOODLE_DIRECTORY}:${PHP_APP_DIR}
-            - ./docker/php/data:${PHP_DATA_DIR}
+            - ./docker/php/data/moodledata:${PHP_DATA_DIR}
+            - ./docker/php/data/phpu_moodledata:${PHP_PHPU_DATA_DIR}
             - ./docker/php/log:${PHP_ROOT_DIR}/logs
             - ./docker/php/conf/www.conf:${PHP_ROOT_DIR}/php-fpm.d/www.conf:ro
             - ./docker/php/conf/docker-php.ini:/usr/local/etc/php/conf.d/docker-php.ini:ro
@@ -62,6 +65,7 @@ services:
                 ipv4_address: ${PHP_IP}
         env_file:
             - .env
+            - .local.env
         environment:
             - MYDEBUG=1
 
@@ -86,6 +90,7 @@ services:
                 ipv4_address: ${MARIADB_IP}
         env_file:
             - .env
+            - .local.env
         ports:
             - ${MARIADB_EXPOSED_PORT}:3306
         command: 'mysqld --innodb-flush-method=fsync'
@@ -110,6 +115,7 @@ services:
             - ${REDIS_EXPOSED_PORT}:6379
         env_file:
             - .env
+            - .local.env
 
     redis2:
         container_name: ${COMPOSE_PROJECT_NAME}_redis2
@@ -125,6 +131,7 @@ services:
             - redis1
         env_file:
             - .env
+            - .local.env
     
     sentinel1:
         container_name: ${COMPOSE_PROJECT_NAME}_sentinel1
@@ -139,6 +146,7 @@ services:
             - redis1
         env_file:
             - .env
+            - .local.env
     
     sentinel2:
         container_name: ${COMPOSE_PROJECT_NAME}_sentinel2
@@ -153,6 +161,7 @@ services:
             - redis1
         env_file:
             - .env
+            - .local.env
 
     sentinel3:
         container_name: ${COMPOSE_PROJECT_NAME}_sentinel3
@@ -167,6 +176,7 @@ services:
             - redis1
         env_file:
             - .env
+            - .local.env
 
     haproxy:
         container_name: ${COMPOSE_PROJECT_NAME}_haproxy
@@ -194,6 +204,7 @@ services:
             - ${ADMINER_EXPOSED_PORT}:8080
         env_file:
             - .env
+            - .local.env
 
     phpredisadmin:
         container_name: ${COMPOSE_PROJECT_NAME}_phpredisadmin
@@ -205,6 +216,7 @@ services:
             - ${PHPREDISADMIN_EXPOSED_PORT}:80
         env_file:
             - .env
+            - .local.env
 
     mailcatcher:
         container_name: ${COMPOSE_PROJECT_NAME}_mailcatcher

@@ -7,6 +7,7 @@ ARG GROUP_ID
 ARG WEB_USER
 ARG WEB_GROUP
 ARG PHP_DATA_DIR
+ARG PHP_PHPU_DATA_DIR
 ARG PHP_ROOT_DIR
  
 # Set TIMEZONE
@@ -20,6 +21,10 @@ RUN apk update && apk upgrade \
     && apk del .userGroupUpdateAndTzdata ${DEL_PKGS} \
     && apk add --no-cache $PHPIZE_DEPS icu-dev libpng-dev libxml2-dev libzip-dev \
     && pecl install igbinary redis xdebug \
-    && docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip \
-    && docker-php-ext-enable igbinary redis xdebug \
+    && docker-php-ext-configure exif \
+    && docker-php-ext-install exif gd intl mysqli opcache soap xmlrpc zip \
+    && docker-php-ext-enable exif igbinary redis xdebug \
     && apk add --no-cache ghostscript
+# Installation de composer
+RUN curl -s https://getcomposer.org/installer | php \
+    && alias composer='php composer.phar'
