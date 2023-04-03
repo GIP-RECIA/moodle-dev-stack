@@ -21,12 +21,13 @@ RUN apk update && apk upgrade \
     && apk del .userGroupUpdateAndTzdata ${DEL_PKGS} \
     && apk add --no-cache $PHPIZE_DEPS icu-dev libpng-dev libxml2-dev libzip-dev \
     && pecl install igbinary redis \
-#    && pecl install xdebug \
     && docker-php-ext-configure exif \
     && docker-php-ext-install exif gd intl mysqli opcache soap xmlrpc zip \
     && docker-php-ext-enable exif igbinary redis \
-#    &&  docker-php-ext-enable xdebug \
     && apk add --no-cache ghostscript
+# Installation d'une version de xdebug compatible PHP 7.3
+RUN pecl install xdebug-3.1.6 \
+    && docker-php-ext-enable xdebug
 # Installation de composer
 RUN curl -s https://getcomposer.org/installer | php \
     && alias composer='php composer.phar'
